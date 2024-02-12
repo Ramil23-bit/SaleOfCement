@@ -9,8 +9,7 @@ public class ReadFile {
     private static final String FILE_PATH_DISCOUNT_DAY = "C:\\Users\\babol\\Ykul\\SaleOfCement\\src\\main\\resources\\discount_day.txt";
 
     public static List<String> readingFilesWithCompanies() throws IOException {
-        List<String>  dataFromFileDiscountDay = Files.readAllLines(Paths.get(FILE_PATH_DISCOUNT_DAY));
-        return dataFromFileDiscountDay;
+        return Files.readAllLines(Paths.get(FILE_PATH_DISCOUNT_DAY));
     }
 
 
