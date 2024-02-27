@@ -1,0 +1,13 @@
+Industrial 4400
+Power Engineer 9614
+Mosque 19872
+Recovery 7371
+Atomic 8750
+Preparatory 16058
+Resident 4488
+Fossil 16660
+Power Engineer 22140
+Carryover 28187
+Electricity 3680
+Ancillary 30000
+Pyramid 10100

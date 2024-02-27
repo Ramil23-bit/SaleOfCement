@@ -1,18 +1,16 @@
-package cementSale;
+package cementSale.order;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Orders {
+public class Order{
     private LocalDateTime date;
-    private String nameCompany;
-    private Integer orderPrice;
-
+    private String companyName;
+    private Integer price;
 
 }
