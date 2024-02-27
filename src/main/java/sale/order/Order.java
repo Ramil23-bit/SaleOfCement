@@ -1,4 +1,4 @@
-package cementSale.order;
+package sale.order;
 
 import lombok.*;
 

@@ -1,14 +1,11 @@
-package cementSale;
+package sale;
 
-import cementSale.order.Order;
-import cementSale.service.FileOrderService;
-import cementSale.service.OrderService;
-import cementSale.service.WriteDataToListObjectService;
+import sale.service.FileOrderService;
+import sale.service.OrderService;
+import sale.service.WriteDataToListObjectService;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {

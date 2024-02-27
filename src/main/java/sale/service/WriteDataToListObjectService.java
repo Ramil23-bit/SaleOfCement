@@ -1,16 +1,11 @@
-package cementSale.service;
+package sale.service;
 
-import cementSale.order.Order;
+import sale.order.Order;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class WriteDataToListObjectService {
     public  List<Order> toOrders(List<String> listString) {
