@@ -1,17 +1,16 @@
 package sale;
 
+import sale.order.OrderManager;
+import sale.service.FileOrderAdapter;
 import sale.service.FileOrderService;
 import sale.service.OrderService;
-import sale.service.WriteDataToListObjectService;
 
 import java.io.IOException;
 import java.text.ParseException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ParseException {
-        OrderService m = new OrderService();
-        FileOrderService readFile = new FileOrderService();
-        WriteDataToListObjectService writeData = new WriteDataToListObjectService();
-        m.orderProcessing(writeData.toOrders(readFile.readingFilesWithCompanies()), 50, 5);
+    public static void main(String[] args) throws IOException {
+        OrderManager manager = new OrderManager(new FileOrderService(),new FileOrderAdapter(), new OrderService());
+        manager.readFile();
     }
 }

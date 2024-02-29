@@ -3,45 +3,42 @@ package sale.service;
 import sale.order.Order;
 import sale.order.OrderReport;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class OrderService extends WriteDataToListObjectService {
+
+public class OrderService {
     public List<OrderReport> orderProcessing(List<Order> listOrders, int percentage, int discountPercentage) throws IOException {
+        FileOrderService fileOrder = new FileOrderService();
+        sortListOrderToDate(listOrders);
+        List<OrderReport> reportList = new ArrayList<>();
+
         for (Order listOrder : listOrders) {
+            OrderReport orderReport = new OrderReport();
             if(!(percentage <= 0)){
                 int totalPrice = calculateDiscountPercentage(listOrder.getPrice(), percentage);
-                listOrder.setPrice(totalPrice);
+                orderReport.setPrice(totalPrice);
+                orderReport.setCompanyName(listOrder.getCompanyName());
                 percentage = percentage - discountPercentage;
             }
+            reportList.add(orderReport);
         }
-        List<OrderReport>reportList = listOrders.stream()
-                .map(r->new OrderReport(r.getCompanyName(), r.getPrice()))
-                .collect(Collectors.toList());
-        writeFinalListToFile(reportList);
+
+        fileOrder.writeFinalListToFile(reportList, "/new_list_order.txt");
 
         return reportList;
     }
 
-    private void writeFinalListToFile(List<OrderReport> reportList) throws IOException {
-        String path1 = Objects.requireNonNull(this.getClass().getResource("/new_list_order.txt")).getPath();
-        File file = new File(path1);
-        FileWriter writer = new FileWriter(file);
-        for(OrderReport result : reportList){
-            String name = result.getCompanyName();
-            Integer price = result.getPrice();
-            writer.write(name + " - " + price);
-            writer.write("\n");
-        }
-        writer.close();
-    }
 
     private int calculateDiscountPercentage(int price, int percentage){
         int resultPercentage = (price * percentage) / 100;
         return price - resultPercentage;
     }
+
+    public void sortListOrderToDate(List<Order> list){
+        list.sort((order1, order2) -> LocalDateTime.now().compareTo(order1.getDate()));
+    }
+
 }

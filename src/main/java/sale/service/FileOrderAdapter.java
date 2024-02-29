@@ -1,13 +1,15 @@
 package sale.service;
 
 import sale.order.Order;
+import sale.order.OrderAdapter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class WriteDataToListObjectService {
+public class FileOrderAdapter implements OrderAdapter {
+    @Override
     public  List<Order> toOrders(List<String> listString) {
         List<Order> resultList = new ArrayList<>();
         sortListOrderToDate(listString);

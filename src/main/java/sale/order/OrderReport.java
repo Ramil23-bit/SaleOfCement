@@ -4,7 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class OrderReport {
     private String companyName;
