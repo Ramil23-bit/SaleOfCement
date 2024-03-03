@@ -5,14 +5,12 @@ import sale.order.OrderAdapter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class FileOrderAdapter implements OrderAdapter {
     @Override
     public  List<Order> toOrders(List<String> listString) {
         List<Order> resultList = new ArrayList<>();
-        sortListOrderToDate(listString);
         for(String line : listString){
             String [] ordersFile = line.split("\\|");
             Order orders = new Order();
@@ -27,7 +25,4 @@ public class FileOrderAdapter implements OrderAdapter {
         return resultList;
     }
 
-    public void sortListOrderToDate(List<String> list){
-        Collections.sort(list);
-    }
 }

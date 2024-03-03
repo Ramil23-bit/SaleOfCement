@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Order{
     private LocalDateTime date;
     private String companyName;

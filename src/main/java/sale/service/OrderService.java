@@ -4,16 +4,15 @@ import sale.order.Order;
 import sale.order.OrderReport;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class OrderService {
     public List<OrderReport> orderProcessing(List<Order> listOrders, int percentage, int discountPercentage) throws IOException {
-        FileOrderService fileOrder = new FileOrderService();
-        sortListOrderToDate(listOrders);
         List<OrderReport> reportList = new ArrayList<>();
+        listOrders.sort(Comparator.comparing(Order::getDate));
 
         for (Order listOrder : listOrders) {
             OrderReport orderReport = new OrderReport();
@@ -22,11 +21,12 @@ public class OrderService {
                 orderReport.setPrice(totalPrice);
                 orderReport.setCompanyName(listOrder.getCompanyName());
                 percentage = percentage - discountPercentage;
+            } else {
+                orderReport.setCompanyName(listOrder.getCompanyName());
+                orderReport.setPrice(listOrder.getPrice());
             }
             reportList.add(orderReport);
         }
-
-        fileOrder.writeFinalListToFile(reportList, "/new_list_order.txt");
 
         return reportList;
     }
@@ -37,8 +37,5 @@ public class OrderService {
         return price - resultPercentage;
     }
 
-    public void sortListOrderToDate(List<Order> list){
-        list.sort((order1, order2) -> LocalDateTime.now().compareTo(order1.getDate()));
-    }
 
 }

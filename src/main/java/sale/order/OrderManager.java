@@ -4,14 +4,13 @@ import sale.service.FileOrderAdapter;
 import sale.service.FileOrderService;
 import sale.service.OrderService;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class OrderManager {
-    final FileOrderAdapter fileOrderAdapter;
-    final OrderService orderService;
-    final FileOrderService fileOrderService;
+    private final FileOrderAdapter fileOrderAdapter;
+    private final OrderService orderService;
+    private final FileOrderService fileOrderService;
 
     public OrderManager(FileOrderService fileService, FileOrderAdapter fileAdapter, OrderService serviceOrder){
         this.fileOrderAdapter = fileAdapter;
@@ -19,11 +18,11 @@ public class OrderManager {
         this.fileOrderService = fileService;
     }
 
-    public void readFile() throws IOException {
-        List<String> readFile = fileOrderService.readFilesWithCompanies("/discount_day.txt");
+    public void handle(String fileToRead, String fileToWrite, int percentage, int discountPercentage) throws IOException {
+        List<String> readFile = fileOrderService.read(fileToRead);
         List<Order> orderList = fileOrderAdapter.toOrders(readFile);
-        List<OrderReport>reports = orderService.orderProcessing(orderList, 50, 5);
-        fileOrderService.writeFinalListToFile(reports, "/new_list_order.txt");
+        List<OrderReport>reports = orderService.orderProcessing(orderList, percentage, discountPercentage);
+        fileOrderService.write(reports, fileToWrite);
     }
 
 }

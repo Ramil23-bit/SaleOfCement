@@ -12,20 +12,22 @@ import java.util.Objects;
 
 public class FileOrderService {
     private final String pathToFile = Objects.requireNonNull(this.getClass().getResource("/orders")).getPath();
-    public List<String> readFilesWithCompanies(String path) throws IOException {
-        File file = new File(pathToFile + path);
+
+    public List<String> read(String fileName) throws IOException {
+        File file = new File(pathToFile + fileName);
         return Files.readAllLines(Paths.get(file.toURI()));
     }
 
-    public void writeFinalListToFile(List<OrderReport> reportList, String path) throws IOException {
-        File file = new File(pathToFile + path);
-        FileWriter writer = new FileWriter(file);
-        for(OrderReport result : reportList){
-            String name = result.getCompanyName();
-            Integer price = result.getPrice();
-            writer.write(name + " - " + price);
-            writer.write("\n");
+    public void write(List<OrderReport> reportList, String fileName){
+        File file = new File(pathToFile + fileName);
+        try (FileWriter writer = new FileWriter(file)){
+            for(OrderReport result : reportList){
+                writer.write(result.toString());
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
-        writer.close();
+
+
     }
 }
