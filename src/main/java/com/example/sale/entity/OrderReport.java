@@ -1,4 +1,4 @@
-package sale.order;
+package com.example.sale.entity;
 
 import lombok.*;
 

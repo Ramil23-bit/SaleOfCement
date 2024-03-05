@@ -1,6 +1,6 @@
-package sale.service;
+package com.example.sale.service;
 
-import sale.order.OrderReport;
+import com.example.sale.entity.OrderReport;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +12,6 @@ import java.util.Objects;
 
 public class FileOrderService {
     private final String pathToFile = Objects.requireNonNull(this.getClass().getResource("/orders")).getPath();
-
     public List<String> read(String fileName) throws IOException {
         File file = new File(pathToFile + fileName);
         return Files.readAllLines(Paths.get(file.toURI()));
@@ -24,8 +23,8 @@ public class FileOrderService {
             for(OrderReport result : reportList){
                 writer.write(result.toString());
             }
-        }catch (IOException e){
-            e.printStackTrace();
+        }catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 

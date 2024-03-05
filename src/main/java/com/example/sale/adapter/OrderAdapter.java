@@ -1,4 +1,6 @@
-package sale.order;
+package com.example.sale.adapter;
+
+import com.example.sale.entity.Order;
 
 import java.util.List;
 
