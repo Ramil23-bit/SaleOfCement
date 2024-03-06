@@ -1,7 +1,6 @@
 package com.example.sale.adapter;
 
 import com.example.sale.entity.Order;
-import com.example.sale.adapter.OrderAdapter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ import com.example.sale.adapter.FileOrderAdapter;
 import com.example.sale.adapter.FileWithoutExtensionAdapter;
 import com.example.sale.adapter.OrderAdapter;
 
-public class CheckingFileExtensionService {
+public class CheckFileExtensionService {
 
     public OrderAdapter checkingFile(String fileName){
         int index = fileName.indexOf('.');
