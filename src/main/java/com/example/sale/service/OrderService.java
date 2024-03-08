@@ -2,6 +2,7 @@ package com.example.sale.service;
 
 import com.example.sale.entity.Order;
 import com.example.sale.entity.OrderReport;
+import com.example.sale.exception.OrderServiceException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,10 +11,13 @@ import java.util.List;
 
 
 public class OrderService {
-    public List<OrderReport> orderProcessing(List<Order> listOrders, int discount, int discountStep) throws IOException {
+    public List<OrderReport> orderProcess(List<Order> listOrders, int discount, int discountStep) throws IOException {
         List<OrderReport> reportList = new ArrayList<>();
         listOrders.sort(Comparator.comparing(Order::getDate));
         int totalPrice;
+        if(listOrders.isEmpty() && discount <= 0 && discountStep <= 0){
+            throw new OrderServiceException("Неверные параметры");
+        }
 
         for (Order listOrder : listOrders) {
             OrderReport orderReport = new OrderReport();

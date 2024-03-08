@@ -6,7 +6,10 @@ import com.example.sale.adapter.OrderAdapter;
 
 public class CheckFileExtensionService {
 
-    public OrderAdapter checkingFile(String fileName){
+    public OrderAdapter checkFile(String fileName){
+        if(fileName == null || fileName.isEmpty()){
+            throw new IllegalArgumentException("Параметр не может быть NULL");
+        }
         int index = fileName.indexOf('.');
         return index == -1 ? new FileWithoutExtensionAdapter() : new FileOrderAdapter();
     }

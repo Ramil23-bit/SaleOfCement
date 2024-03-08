@@ -20,10 +20,10 @@ public class OrderManager {
     }
     public void handle(String fileToRead, String fileToWrite, int percentage, int discountPercentage) throws IOException {
         CheckFileExtensionService checking = new CheckFileExtensionService();
-        OrderAdapter orderAdapter = checking.checkingFile(fileToRead);
+        OrderAdapter orderAdapter = checking.checkFile(fileToRead);
         List<String> readFile = fileOrderService.read(fileToRead);
         List<Order> orderList = orderAdapter.toOrders(readFile);
-        List<OrderReport> reports = orderService.orderProcessing(orderList, percentage, discountPercentage);
+        List<OrderReport> reports = orderService.orderProcess(orderList, percentage, discountPercentage);
         fileOrderService.write(reports, fileToWrite);
 
 
