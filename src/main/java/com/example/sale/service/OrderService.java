@@ -18,6 +18,9 @@ public class OrderService {
         if(listOrders.isEmpty() && discount <= 0 && discountStep <= 0){
             throw new OrderServiceException("Неверные параметры");
         }
+        if(discountStep > discount){
+            throw new OrderServiceException("Шаг скидки не может быть больше скидки");
+        }
 
         for (Order listOrder : listOrders) {
             OrderReport orderReport = new OrderReport();
