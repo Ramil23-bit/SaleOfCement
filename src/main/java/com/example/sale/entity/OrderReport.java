@@ -4,10 +4,15 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class OrderReport {
     private String companyName;
     private Integer price;
+    public OrderReport(){}
+
+    public OrderReport(String companyName, Integer price) {
+        this.companyName = companyName;
+        this.price = price;
+    }
 
     @Override
     public String toString() {

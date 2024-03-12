@@ -23,14 +23,16 @@ public class FileOrderService {
 
     public void write(List<OrderReport> reportList, String fileName){
         File file = new File(pathToFile + fileName);
-        try (FileWriter writer = new FileWriter(file)){
+        if(fileName == null && reportList == null){
+            throw new IllegalArgumentException("Имя файла NULL");
+        }
+        try (FileWriter writerFile = new FileWriter(file)){
             for(OrderReport result : reportList){
-                writer.write(result.toString());
+                writerFile.write(result.toString());
             }
         }catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
-
 
     }
 }

@@ -1,7 +1,7 @@
 package sale.service;
 
+import com.example.sale.entity.OrderReport;
 import com.example.sale.exception.OrderServiceException;
-import com.example.sale.exception.ServiceException;
 import org.junit.Test;
 import com.example.sale.service.FileOrderService;
 
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,5 +53,42 @@ public class FileOrderServiceTest {
         assertEquals(list.get(0),file.read("/discount_test.txt").get(0));
         assertEquals(list.get(1),file.read("/discount_test.txt").get(1));
         assertEquals(list.get(2),file.read("/discount_test.txt").get(2));
+    }
+    @Test
+    public void write_shouldAnErrorMessage_ifInvalidFileName(){
+        FileOrderService file = new FileOrderService();
+        assertThrows(IllegalArgumentException.class, () -> file.write(null, null));
+    }
+    @Test
+    public void write_shouldAnMessage_ifNoFileName(){
+        FileOrderService file = new FileOrderService();
+        List<OrderReport> report = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> file.write(report, ""));
+    }
+    @Test
+    public void write_shouldReturnFile_ifListAndFileEmpty(){
+        String pathToFile = Objects.requireNonNull(this.getClass().getResource("/orders")).getPath();
+        List<OrderReport> reports = Collections.emptyList();
+        File file = new File(pathToFile + "/new_list.txt");
+        assertTrue(reports.isEmpty());
+        assertEquals(0, file.length());
+    }
+    @Test
+    public void write_shouldReturnMessage_ifFileCreated(){
+        String pathToFile = Objects.requireNonNull(this.getClass().getResource("/orders")).getPath();
+        File file = new File(pathToFile + "/new_list_test.txt");
+        assertTrue(file.exists());
+    }
+    @Test
+    public void write_shouldReturnList_ifInputCorrectedDate(){
+        FileOrderService fileService = new FileOrderService();
+        List<OrderReport> reports = new ArrayList<>();
+        OrderReport report = new OrderReport("Mebel", 4323);
+        OrderReport report1 = new OrderReport("Dom", 1790);
+        OrderReport report2 = new OrderReport("Hause", 7321);
+        reports.add(report);
+        reports.add(report1);
+        reports.add(report2);
+        fileService.write(reports, "/new_list_test.txt");
     }
 }
