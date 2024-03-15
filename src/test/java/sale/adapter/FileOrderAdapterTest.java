@@ -1,6 +1,5 @@
 package sale.adapter;
 
-
 import com.example.sale.adapter.FileOrderAdapter;
 import com.example.sale.entity.Order;
 import com.example.sale.exception.AdapterException;
@@ -51,5 +50,4 @@ public class FileOrderAdapterTest {
         assertEquals(9421, orderList.get(2).getPrice());
 
     }
-
 }

@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileOrderServiceTest {
@@ -90,5 +89,6 @@ public class FileOrderServiceTest {
         reports.add(report1);
         reports.add(report2);
         fileService.write(reports, "/new_list_test.txt");
+        assertFalse("/new_list_test.txt".isEmpty());
     }
 }

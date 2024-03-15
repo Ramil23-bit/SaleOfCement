@@ -14,22 +14,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class OrderServiceTest {
-
     @Test
     public void orderProcess_shouldReturnError_ifInputInvalidData() {
         OrderService orderService = new OrderService();
         List<Order> orderList = Collections.emptyList();
         assertThrows(IllegalArgumentException.class, () -> orderService.orderProcess(orderList, 0, 0));
     }
-
     @Test
     public void orderProcess_shouldReturnError_ifInputNull() {
         OrderService orderService = new OrderService();
         assertThrows(IllegalArgumentException.class, () -> orderService.orderProcess(null, 0, 0));
     }
-
     @Test
     public void orderProcess_shouldReturnList_ifListIsEmpty() throws IOException {
         OrderService orderService = new OrderService();
@@ -37,21 +33,18 @@ public class OrderServiceTest {
         List<OrderReport> report = orderService.orderProcess(orderList, 30, 2);
         assertTrue(report.isEmpty());
     }
-
     @Test
     public void orderProcess_shouldReturnList_ifDiscountStepMoreDiscount() {
         OrderService orderService = new OrderService();
         List<Order> orders = new ArrayList<>();
         assertThrows(OrderServiceException.class, () -> orderService.orderProcess(orders, 20, 25));
     }
-
     @Test
     public void orderProcess_shouldReturnError_ifInputNegativeNumbers() {
         OrderService orderService = new OrderService();
         List<Order> orders = new ArrayList<>();
         assertThrows(IllegalArgumentException.class, () -> orderService.orderProcess(orders, -24, -3));
     }
-
     @Test
     public void orderProcess_shouldReturnList_ifInputCorrectedData() throws IOException {
         OrderService orderService = new OrderService();
@@ -70,7 +63,6 @@ public class OrderServiceTest {
         assertEquals("Dom", reports.get(2).getCompanyName());
         assertEquals(4085, reports.get(2).getPrice());
     }
-
     @Test
     public void orderProcess_shouldReturnList_ifDiscountStepZero() throws IOException {
         OrderService orderService = new OrderService();

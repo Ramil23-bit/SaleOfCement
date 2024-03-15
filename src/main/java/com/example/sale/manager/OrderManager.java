@@ -10,14 +10,16 @@ import com.example.sale.service.FileOrderService;
 import java.io.IOException;
 import java.util.List;
 public class OrderManager {
-    private final CheckFileExtensionService checkingFile;
+    private final CheckFileExtensionService checkFile;
     private final OrderService orderService;
     private final FileOrderService fileOrderService;
-    public OrderManager(FileOrderService fileService, CheckFileExtensionService checkingFile, OrderService serviceOrder){
-        this.checkingFile = checkingFile;
+    public OrderManager(FileOrderService fileService, CheckFileExtensionService checkFile1, OrderService serviceOrder){
+        this.checkFile = checkFile1;
         this.orderService = serviceOrder;
         this.fileOrderService = fileService;
     }
+
+
     public void handle(String fileToRead, String fileToWrite, int percentage, int discountPercentage) throws IOException {
         CheckFileExtensionService checking = new CheckFileExtensionService();
         OrderAdapter orderAdapter = checking.checkFile(fileToRead);
@@ -25,8 +27,6 @@ public class OrderManager {
         List<Order> orderList = orderAdapter.toOrders(readFile);
         List<OrderReport> reports = orderService.orderProcess(orderList, percentage, discountPercentage);
         fileOrderService.write(reports, fileToWrite);
-
-
     }
 
 }

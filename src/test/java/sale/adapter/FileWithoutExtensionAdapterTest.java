@@ -1,6 +1,5 @@
 package sale.adapter;
 
-import com.example.sale.adapter.FileOrderAdapter;
 import com.example.sale.adapter.FileWithoutExtensionAdapter;
 import com.example.sale.entity.Order;
 import com.example.sale.exception.AdapterException;
