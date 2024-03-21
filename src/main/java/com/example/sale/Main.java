@@ -11,6 +11,6 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         OrderManager manager = new OrderManager(new FileOrderService(),new CheckFileExtensionService(), new OrderService());
-        manager.handle("/discount_day", "/new_list_order.txt", 50, 5);
+        manager.handle("/discount_day.txt", "/new_list_order.txt", 50, 5);
     }
 }

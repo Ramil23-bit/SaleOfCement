@@ -13,16 +13,15 @@ public class OrderManager {
     private final CheckFileExtensionService checkFile;
     private final OrderService orderService;
     private final FileOrderService fileOrderService;
-    public OrderManager(FileOrderService fileService, CheckFileExtensionService checkFile1, OrderService serviceOrder){
-        this.checkFile = checkFile1;
+    public OrderManager(FileOrderService fileService, CheckFileExtensionService checkFile, OrderService serviceOrder){
+        this.checkFile = checkFile;
         this.orderService = serviceOrder;
         this.fileOrderService = fileService;
     }
 
 
-    public void handle(String fileToRead, String fileToWrite, int percentage, int discountPercentage) throws IOException {
-        CheckFileExtensionService checking = new CheckFileExtensionService();
-        OrderAdapter orderAdapter = checking.checkFile(fileToRead);
+    public void handle(String fileToRead, String fileToWrite ,int percentage, int discountPercentage) throws IOException {
+        OrderAdapter orderAdapter = checkFile.checkFile(fileToRead);
         List<String> readFile = fileOrderService.read(fileToRead);
         List<Order> orderList = orderAdapter.toOrders(readFile);
         List<OrderReport> reports = orderService.orderProcess(orderList, percentage, discountPercentage);
