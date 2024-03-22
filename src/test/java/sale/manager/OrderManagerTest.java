@@ -33,12 +33,9 @@ public class OrderManagerTest {
     private FileOrderAdapter fileAdapter;
     @Mock
     OrderAdapter orderAdapter;
-    @Mock
-    List<String> listMock;
-    @Mock
-    List<Order> listOrder;
-    @Mock
-    List<OrderReport> reportList;
+    private List<String> listMock;
+    private List<Order> listOrder;
+    private List<OrderReport> reportList;
     @InjectMocks
     private OrderManager orderManager;
 
