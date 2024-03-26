@@ -18,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -33,9 +34,6 @@ public class OrderManagerTest {
     private FileOrderAdapter fileAdapter;
     @Mock
     OrderAdapter orderAdapter;
-    private List<String> listMock;
-    private List<Order> listOrder;
-    private List<OrderReport> reportList;
     @InjectMocks
     private OrderManager orderManager;
 
@@ -46,6 +44,9 @@ public class OrderManagerTest {
 
     @Test
     public void checkFile_shouldReturnObject_ifInputNormalData() throws IOException {
+        List<String> listMock = new ArrayList<>();
+        List<Order> listOrder = new ArrayList<>();
+        List<OrderReport> reportList = new ArrayList<>();
         when(check.checkFile("/discount_day.txt")).thenReturn(fileAdapter);
         when(fileOrderService.read("/discount_day.txt")).thenReturn(listMock);
         when(orderAdapter.toOrders(listMock)).thenReturn(listOrder);
@@ -55,6 +56,9 @@ public class OrderManagerTest {
 
     @Test
     public void checkFile_shouldReturnErrorMessage_ifInputNullParameter() throws IOException {
+        List<String> listMock = new ArrayList<>();
+        List<Order> listOrder = new ArrayList<>();
+        List<OrderReport> reportList = new ArrayList<>();
         when(check.checkFile(null)).thenThrow(IllegalArgumentException.class);
         when(fileOrderService.read(null)).thenThrow(IllegalArgumentException.class);
         when(orderAdapter.toOrders(listMock)).thenReturn(listOrder);
